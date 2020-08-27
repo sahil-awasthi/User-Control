@@ -1,6 +1,6 @@
 import { FETCH_USERS, ADD_USER } from '../actions/actionTypes';
 
-export default function (state, action) {
+export default function (state = [], action) {
     switch (action.type) {
         case ADD_USER:
             return [...state, action.user];
@@ -13,6 +13,3 @@ export default function (state, action) {
     }
 
 }
-
-
-//2

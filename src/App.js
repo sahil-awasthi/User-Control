@@ -1,39 +1,69 @@
 import React, { Component } from 'react';
-import './App.css';
-import Users from './Users'
+import { connect } from 'react-redux';
+import User from './User'
+import { handleFetchUsers, handleAddUser } from './redux/actions/user.actions';
 
 class App extends Component {
   state = {
-    name: ["sahil"],
-    dummy: ''
+    name: '',
+    job: ''
   }
 
-  nameHandler = (event) => {
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(handleFetchUsers());
+  }
+
+  handleChange = (e) => {
     this.setState({
-      dummy: event.target.value
+      [e.target.name]: e.target.value
     })
-    console.log(this.state.dummy);
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  onAddUser = () => {
+    const { name, job } = this.state;
+
+    this.props.dispatch(handleAddUser({name, job}));
+
+    this.setState({ name: '', job: '' });
+  }
+
+  callUpdateUserAction = () => {
+     
+  }
+
+  onUpdateUser = (first_name, last_name, id) => {
     this.setState({
-      name: this.state.name.concat(this.state.dummy)
-    });
-    console.log(this.state.name);
+      name: `${first_name} ${last_name}`,
+      id
+    })
   }
 
   render() {
+    const { users } = this.props;
+    const { name, job, id } = this.state;
+
     return (
       <div>
-        <Users
-          dummy={this.state.dummy}
-          name={this.state.name}
-          nameEntered={this.nameHandler}
-          handleSubmit={this.handleSubmit} />
+        <div>
+          <input type="text" name="name" placeholder="name" value={name} onChange={this.handleChange} />
+          <input type="text" name="job" placeholder="job" value={job} onChange={this.handleChange} />
+          <button onClick={this.onAddUser}>Add User</button>
+          <button onClick={this.onAddUser}>Update User</button>
+        </div>
+        {users.map(user => (
+          <User {...user} key={user.id} onUpdateUser={this.onUpdateUser} />
+        ))}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
+  };
+}
+
+export default connect(mapStateToProps)(App);
