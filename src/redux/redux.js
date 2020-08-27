@@ -12,11 +12,23 @@ const fetch_user = () => {
     }
 }
 
+const delete_user = () => {
+    return {
+        type: DELETE_USER
+    }
+}
+
+const update_user = () => {
+    return {
+        type: UPDATE_USER
+    }
+}
+
 const user = ['sahil']
 
 
 
-let store = createStore (nameChanger)
+let store = createStore(nameChanger)
 
 store.subscribe(() => console.log(store.GetState()));
 

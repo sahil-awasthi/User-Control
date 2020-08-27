@@ -1,4 +1,4 @@
-import { FETCH_USERS, ADD_USER } from './actionTypes';
+import { FETCH_USERS, ADD_USER, DELETE_USER, UPDATE_USER } from './actionTypes';
 import axios from 'axios';
 
 const fetchUsers = (users) => {
@@ -6,6 +6,27 @@ const fetchUsers = (users) => {
         type: FETCH_USERS,
         users
     };
+}
+
+const addUser = (user) => {
+    return {
+        type: ADD_USER,
+        user
+    }
+}
+
+const deleteUser = (id) => {
+    return {
+        type: DELETE_USER,
+        id
+    }
+}
+
+const updateUser = (user) => {
+    return {
+        type: UPDATE_USER,
+        user
+    }
 }
 
 export const handleFetchUsers = () => {
@@ -20,10 +41,26 @@ export const handleFetchUsers = () => {
     }
 }
 
-const addUser = (user) => {
-    return {
-        type: ADD_USER,
-        user
+export const handleDeleteUser = (id) => {
+    return async dispatch => {
+        try {
+            axios.delete(`https://reqres.in/api/users/${id}`);
+            dispatch(deleteUser(id))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const handleUpdateUser = (id) => {
+    return async dispatch => {
+        try {
+            axios.patch(`https://reqres.in/api/users/${id}`);
+            dispatch(updateUser(id))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

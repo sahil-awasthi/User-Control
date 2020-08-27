@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import User from './User'
-import { handleFetchUsers, handleAddUser } from './redux/actions/user.actions';
+import { handleFetchUsers, handleAddUser, handleDeleteUser } from './redux/actions/user.actions';
 
 class App extends Component {
   state = {
@@ -40,9 +40,13 @@ class App extends Component {
     })
   }
 
+  onDeleteUser = (id) => {
+    this.props.dispatch(handleDeleteUser(id));
+  }
+
   render() {
     const { users } = this.props;
-    const { name, job, id } = this.state;
+    const { name, job} = this.state;
 
     return (
       <div>
@@ -53,7 +57,11 @@ class App extends Component {
           <button onClick={this.onAddUser}>Update User</button>
         </div>
         {users.map(user => (
-          <User {...user} key={user.id} onUpdateUser={this.onUpdateUser} />
+          <User 
+          {...user} 
+          key={user.id} 
+          onUpdateUser={this.onUpdateUser} 
+          onDeleteUser={this.onDeleteUser}/>
         ))}
       </div>
     );
