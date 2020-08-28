@@ -53,11 +53,19 @@ export const handleDeleteUser = (id) => {
     }
 }
 
-export const handleUpdateUser = (id) => {
+export const handleUpdateUser = (first_name, last_name, id) => {
     return async dispatch => {
         try {
-            axios.patch(`https://reqres.in/api/users/${id}`);
-            dispatch(updateUser(id))
+            const passData = {
+                first_name,
+                last_name,
+                id
+            }
+
+            const { data } = await axios.patch(`https://reqres.in/api/users/${id}`, passData);
+
+            dispatch(updateUser(data))
+            
         } catch (error) {
             console.log(error)
         }

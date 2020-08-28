@@ -9,15 +9,13 @@ export default function (state = [], action) {
             return [...action.users];
 
         case DELETE_USER:
-            return state.filter((user => user.id !== action.id))
+            return state.filter((user => user.id !== action.id));
 
         case UPDATE_USER:
-            return state.map((user) => {
-                if (user.id === action.id) {
-                    [user.first_name, user.last_name] = action.user.name.split(' ')
-                }
-                return user
-            })
+            console.log('user reducer', state);
+            const index = state.findIndex((user) => user.id === action.user.id);
+            state.splice(index, 1, action.user );
+            return state
 
         default:
             return state;

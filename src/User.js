@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 
 const User = (props) => {
     const { first_name, last_name, id, onUpdateUser, onDeleteUser } = props;
@@ -7,13 +8,8 @@ const User = (props) => {
         <ul key={id}>
             <li>
                 {first_name} {last_name}
-                <button onClick={() => onDeleteUser(id)} >Delete</button> 
-                <button onClick={() => {
-                    return (
-                        onUpdateUser(first_name, last_name, id),
-                        onDeleteUser(id)
-                    )
-                } }>Update</button>
+                <Button variant="contained" onClick={() => onDeleteUser(id)} >Delete</Button>
+                <Button variant="contained" color="primary" onClick={() => onUpdateUser(first_name, last_name, id)}>Update</Button>
             </li>
         </ul>
     );
