@@ -12,7 +12,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 class App extends Component {
   state = {
     name: '',
-    job: ''
+    email: ''
   }
 
   useStyles = makeStyles((Theme) =>
@@ -38,11 +38,11 @@ class App extends Component {
   }
 
   onAddUser = () => {
-    const { name, job } = this.state;
+    const { name, email } = this.state;
 
-    this.props.dispatch(handleAddUser({ name, job }));
+    this.props.dispatch(handleAddUser({ name, email }));
 
-    this.setState({ name: '', job: '' });
+    this.setState({ name: '', email: '' });
   }
 
   onUpdateUserHandler = () => {
@@ -60,7 +60,7 @@ class App extends Component {
     }, 1500)
 
 
-    this.setState({ name: '', job: '' })
+    this.setState({ name: '', email: '' })
   }
 
   onUpdateUser = (first_name, last_name, id) => {
@@ -76,7 +76,7 @@ class App extends Component {
 
   render() {
     const { users } = this.props;
-    const { name, id } = this.state;
+    const { name, id, email } = this.state;
 
 
     return (
@@ -87,7 +87,7 @@ class App extends Component {
               <TextField id="outlined-basic" variant="outlined" name="name" label="name" value={name} size="small" onChange={this.handleChange} />
             </Grid>
             <Grid container item xs={12} md={4} direction="row" justify="center" alignItems="center" >
-              <TextField id="outlined-basic" variant="outlined" name="job" label="job" size="small" onChange={this.handleChange} />
+              <TextField id="outlined-basic" variant="outlined" name="email" label="email" value={email} size="small" onChange={this.handleChange} />
             </Grid>
             <Grid container item xs={6} md={1} direction="row" justify="center" alignItems="center">
               <IconButton pt={5} onClick={this.onAddUser} >

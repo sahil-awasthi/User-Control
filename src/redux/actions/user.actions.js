@@ -72,7 +72,7 @@ export const handleUpdateUser = (first_name, last_name, id) => {
     }
 }
 
-export const handleAddUser = (user) => { // user { name, job }
+export const handleAddUser = (user) => {
     return async dispatch => {
         try {
             const { data } = await axios.post('https://reqres.in/api/users', user);
