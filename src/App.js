@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import User from './User'
 
 import { handleFetchUsers, handleAddUser, handleDeleteUser, handleUpdateUser } from './redux/actions/user.actions';
-import { Grid, IconButton, TextField } from '@material-ui/core';
+import { Grid, IconButton, TextField, AppBar, Toolbar, Typography, Menu } from '@material-ui/core';
 import { Add, Save } from '@material-ui/icons';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -80,7 +80,17 @@ class App extends Component {
 
 
     return (
-      <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
+      <Grid container direction="row" justify="center" alignItems="center" > 
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <IconButton edge="start" color="secondary" aria-label="menu">
+              <Menu />
+            </IconButton>
+            <Typography variant="h5" >
+              Users information
+          </Typography>
+          </Toolbar>
+        </AppBar>
         <Grid container item xs={12} sm={6} md={6} lg={6}>
           <Grid container item xs={12} p={5} direction="row" justify="center" alignItems="center">
             <Grid container item xs={12} md={4} direction="row" justify="center" alignItems="center">
